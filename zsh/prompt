@@ -1,0 +1,31 @@
+# prompt
+RESETCOLOR=''
+HOSTCOLOR=''
+PATHCOLOR=''
+BOLDERRORCOLOR=''
+BLACKCOLOR=''
+
+case "${TERM}" in
+	dumb)
+	;;
+	*)
+		if command -v tput >/dev/null 2>&1 && [ `tput colors` != -1 ] ; then
+			RESETCOLOR=$'%{\e[00;00m%}'
+			if [ -z "${SSH_TTY}" ] ; then
+				HOSTCOLOR=$'%{\e[01;32m%}'
+			else
+				HOSTCOLOR=$'%{\e[01;36m%}'
+			fi
+			PATHCOLOR=$'%{\e[01;34m%}'
+			ERRORCOLOR=$'%{\e[00;31m%}'
+			BOLDERRORCOLOR=$'%{\e[01;31m%}'
+			CLOCKCOLOR=$'%{\e[01;33m%}'
+			JOBCOLOR=$'%{\e[00;36m%}'
+			BLACKCOLOR=$'%{\e[00;30m%}'
+		fi
+		;;
+esac
+
+PROMPT=${RESETCOLOR}${HOSTCOLOR}$'%n@%m'${BLACKCOLOR}':'${PATHCOLOR}$'%45<...<%~ %(?..'${BOLDERRORCOLOR}$')%(!.#.$) '${RESETCOLOR}
+
+RPROMPT=${RESETCOLOR}$'%1(j.'${JOBCOLOR}$'[%j].)%(?..'${ERRORCOLOR}$'[%?])'${CLOCKCOLOR}$'[%t]'${RESETCOLOR}
