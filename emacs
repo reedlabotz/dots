@@ -7,7 +7,7 @@
 (keyboard-translate ?\C-u ?\C-x)
 
 ;; add color theme
-(add-to-list 'load-path "~/dots/tomorrow-theme/emacs/")
+(add-to-list 'load-path "~/dots/tomorrow-theme/GNU Emacs/")
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
